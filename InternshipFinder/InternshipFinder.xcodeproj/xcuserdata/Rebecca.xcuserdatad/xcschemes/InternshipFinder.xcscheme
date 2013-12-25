@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B33ACC5D17FD194D00C39CD2"
+               BlueprintIdentifier = "B3213B091868F1040071C770"
                BuildableName = "InternshipFinder.app"
                BlueprintName = "InternshipFinder"
                ReferencedContainer = "container:InternshipFinder.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B33ACC8417FD194D00C39CD2"
+               BlueprintIdentifier = "B3213B301868F1050071C770"
                BuildableName = "InternshipFinderTests.xctest"
                BlueprintName = "InternshipFinderTests"
                ReferencedContainer = "container:InternshipFinder.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B33ACC5D17FD194D00C39CD2"
+            BlueprintIdentifier = "B3213B091868F1040071C770"
             BuildableName = "InternshipFinder.app"
             BlueprintName = "InternshipFinder"
             ReferencedContainer = "container:InternshipFinder.xcodeproj">
@@ -61,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B33ACC5D17FD194D00C39CD2"
+            BlueprintIdentifier = "B3213B091868F1040071C770"
             BuildableName = "InternshipFinder.app"
             BlueprintName = "InternshipFinder"
             ReferencedContainer = "container:InternshipFinder.xcodeproj">
@@ -79,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B33ACC5D17FD194D00C39CD2"
+            BlueprintIdentifier = "B3213B091868F1040071C770"
             BuildableName = "InternshipFinder.app"
             BlueprintName = "InternshipFinder"
             ReferencedContainer = "container:InternshipFinder.xcodeproj">

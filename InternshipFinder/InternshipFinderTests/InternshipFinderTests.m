@@ -2,7 +2,7 @@
 //  InternshipFinderTests.m
 //  InternshipFinderTests
 //
-//  Created by Rebecca Vessal on 10/2/13.
+//  Created by Rebecca Vessal on 12/23/13.
 //  Copyright (c) 2013 Rebecca Vessal. All rights reserved.
 //
 

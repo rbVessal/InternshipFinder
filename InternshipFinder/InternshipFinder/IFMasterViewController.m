@@ -12,11 +12,15 @@
 
 @interface IFMasterViewController ()
 {
+    //Private instance variables
     NSMutableArray *_objects;
-    NSString *internshipType;
-    NSString *internshipCityLocation;
-    NSString *internshipStateLocation;
-    NSString *searchType;//optional if you want to search for both full-time and internships
+    NSString *_internshipType;
+    NSString *_internshipCityLocation;
+    NSString *_internshipStateLocation;
+    NSString *_searchType;//optional if you want to search for both full-time and internships
+    dispatch_queue_t _backgroundQueue;
+    UIActivityIndicatorView *_uiActivityIndicatorView;
+    
 }
 @end
 
@@ -39,15 +43,24 @@
     [self.cityTextField resignFirstResponder];
     [self.stateTextField resignFirstResponder];
     //Grab the user's input for the internship search
-    internshipType = self.internshipTypeTextField.text;
-    internshipCityLocation = self.cityTextField.text;
-    internshipStateLocation = self.stateTextField.text;
+    _internshipType = self.internshipTypeTextField.text;
+    _internshipCityLocation = self.cityTextField.text;
+    _internshipStateLocation = self.stateTextField.text;
     //Replace spaces with '+' signs for query
-    internshipType = [internshipType stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    internshipCityLocation = [internshipCityLocation stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    internshipStateLocation = [internshipStateLocation stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    //Load in the results
-    [self loadInternships];
+    _internshipType = [_internshipType stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    _internshipCityLocation = [_internshipCityLocation stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    _internshipStateLocation = [_internshipStateLocation stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
+    _uiActivityIndicatorView.hidden = NO;
+    [_uiActivityIndicatorView startAnimating];
+    //Do the search asynchronously on the background thread using Grand central
+    //dispatch so that the user can still interact with the UI which is on the main thread
+    dispatch_async(_backgroundQueue, ^(void)
+    {
+        //Load in the results
+        [self loadInternships];
+    });
+   
 }
 
 //Load in the internships based on the user's input
@@ -57,7 +70,7 @@
     //Note: replace dataWithContentsOfURL with NSURLConnection to make this async
     //Add %% to escape the %
     //see: http://stackoverflow.com/questions/739682/how-to-add-percent-sign-to-nsstring
-    NSURL *internshipsURL = [NSURL URLWithString:[NSString stringWithFormat: @"http://www.internmatch.com/search/internships?commit=search&location=%@%%2C+%@&q=%@&searchType=both&utf8=%%E2%%9C%%93", internshipCityLocation, internshipStateLocation, internshipType]];
+    NSURL *internshipsURL = [NSURL URLWithString:[NSString stringWithFormat: @"http://www.internmatch.com/search/internships?commit=search&location=%@%%2C+%@&q=%@&searchType=both&utf8=%%E2%%9C%%93", _internshipCityLocation, _internshipStateLocation, _internshipType]];
     
   
     NSData *internshipsHTMLData = [NSData dataWithContentsOfURL:internshipsURL];
@@ -91,6 +104,7 @@
     //for the cells
     _objects = newInternships;
     
+    [_uiActivityIndicatorView stopAnimating];
     //Refresh the tableview with new data
     [self.tableView reloadData];
 }
@@ -99,11 +113,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (IFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    //Initialize the dispatch queue
+    _backgroundQueue = dispatch_queue_create("background", NULL);
+    //Initialize the spinner
+    _uiActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _uiActivityIndicatorView.hidesWhenStopped = YES;
+    _uiActivityIndicatorView.hidden = YES;
+    //_uiActivityIndicatorView.color = [UIColor blackColor];
+    [_uiActivityIndicatorView setCenter:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2)];
+    [self.view addSubview:_uiActivityIndicatorView];
     
 }
 
@@ -111,16 +132,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Table View

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TFHpple.h"
 #import "IFInternship.h"
+#import <dispatch/dispatch.h>
 
 @class IFDetailViewController;
 

@@ -101,6 +101,7 @@
                         <outlet property="cityTextField" destination="yp6-pH-fQZ" id="Zof-gd-AZC"/>
                         <outlet property="internshipTypeTextField" destination="eOO-8n-DTf" id="nYS-h9-fzp"/>
                         <outlet property="stateTextField" destination="ytB-T3-3Hk" id="1al-g9-eqD"/>
+                        <outlet property="view" destination="mLL-gJ-YKr" id="hG1-Yl-zsU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>

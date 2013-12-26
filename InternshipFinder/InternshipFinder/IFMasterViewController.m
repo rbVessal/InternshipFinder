@@ -70,9 +70,8 @@
     //Note: replace dataWithContentsOfURL with NSURLConnection to make this async
     //Add %% to escape the %
     //see: http://stackoverflow.com/questions/739682/how-to-add-percent-sign-to-nsstring
-    NSURL *internshipsURL = [NSURL URLWithString:[NSString stringWithFormat: @"http://www.internmatch.com/search/internships?commit=search&location=%@%%2C+%@&q=%@&searchType=both&utf8=%%E2%%9C%%93", _internshipCityLocation, _internshipStateLocation, _internshipType]];
+    NSURL *internshipsURL = [NSURL URLWithString:[NSString stringWithFormat: @"http://www.internmatch.com/search/internships?&&&count=10&location=%@%%2C+%@&page=1&q=%@&sort=relevance", _internshipCityLocation, _internshipStateLocation, _internshipType]];
     
-  
     NSData *internshipsHTMLData = [NSData dataWithContentsOfURL:internshipsURL];
     
     //Create the Hpple parser to use for HTML parsing with the raw data from the internship page
@@ -80,7 +79,9 @@
     
     //Ask for the information you seek with the query string
     //The information will come back as nodes
-    NSString *internshipsXpathQueryString = @"//ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'title']/a";
+    //Use union operator to get nodes at different levels
+    //see: http://stackoverflow.com/questions/11040469/xpath-how-to-select-multiple-nodes-in-different-levels
+    NSString *internshipsXpathQueryString = @"//ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'title']/a | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization'] | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization']/a/span";
     NSArray *internshipsNodes = [internshipsParser searchWithXPathQuery:internshipsXpathQueryString];
     
     
@@ -88,15 +89,38 @@
     //Create an internship object to hold the information
     //needed to be displayed in the tableview cell
     //The information can be found in the hpple element nodes
+    //The internship nodes are ordered according to the structure of the tree
+    //For example, it will find the a tag with title and url, then the organization div tag with most
+    //likely the company name, and then the span tag if there is one.  The span tag will have the
+    //company name that was not found in the organization div tag
+    int companyCounter = 0;
     for(TFHppleElement *element in internshipsNodes)
     {
-        IFInternship *internship = [[IFInternship alloc]init];
+        
         //Check to make sure the content is not nil, this is a known bug with hpple parser
         if([[element firstChild] content] != nil && [element objectForKey:@"href"] != nil)
         {
+            IFInternship *internship = [[IFInternship alloc]init];
             internship.title = [[element firstChild] content];
             internship.url = [element objectForKey:@"href"];
             [newInternships addObject:internship];
+        }
+        else if([[element objectForKey:@"class"] isEqualToString: @"organization"])
+        {
+            IFInternship *internship = [newInternships objectAtIndex:companyCounter];
+            internship.company = [[element firstChild]content];
+            internship.company = [internship.company stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            companyCounter++;
+        }
+        else
+        {
+            //for internmatch.com any company name for an internship that has a link embedded
+            //in it is a span tag and also has a /n for the organization div tag
+            //so we need to decrement the counter to get the right internship
+            companyCounter--;
+            IFInternship *internship = [newInternships objectAtIndex:companyCounter];
+            internship.company = [[element firstChild]content];
+            companyCounter++;
         }
     }
     
@@ -113,7 +137,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-
     self.detailViewController = (IFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     //Initialize the dispatch queue
@@ -152,7 +175,7 @@
     //Note:  In storyboards, the resusable cell is never nil, so no need to check for this
     IFInternship *internship = [_objects objectAtIndex:indexPath.row];
     cell.textLabel.text = internship.title;
-    cell.detailTextLabel.text = internship.url;
+    cell.detailTextLabel.text = internship.company;
 
     return cell;
 }

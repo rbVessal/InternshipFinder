@@ -10,7 +10,8 @@
 
 @interface IFInternship : NSObject
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *url;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *company;
+@property (nonatomic, strong) NSString *url;
 
 @end

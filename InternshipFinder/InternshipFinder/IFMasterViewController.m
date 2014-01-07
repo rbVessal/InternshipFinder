@@ -67,71 +67,78 @@
 -(void)loadInternships
 {
     //Download the internship page and get the raw data from it
-    //Note: replace dataWithContentsOfURL with NSURLConnection to make this async
+    //Use NSURLConnection to make this async and cache the data
     //Add %% to escape the %
     //see: http://stackoverflow.com/questions/739682/how-to-add-percent-sign-to-nsstring
     NSURL *internshipsURL = [NSURL URLWithString:[NSString stringWithFormat: @"http://www.internmatch.com/search/internships?&&&count=10&location=%@%%2C+%@&page=1&q=%@&sort=relevance", _internshipCityLocation, _internshipStateLocation, _internshipType]];
     
-    NSData *internshipsHTMLData = [NSData dataWithContentsOfURL:internshipsURL];
+    NSURLRequest *internshipURLRequest = [NSURLRequest requestWithURL:internshipsURL];
+    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     
-    //Create the Hpple parser to use for HTML parsing with the raw data from the internship page
-    TFHpple *internshipsParser = [TFHpple hppleWithHTMLData:internshipsHTMLData];
-    
-    //Ask for the information you seek with the query string
-    //The information will come back as nodes
-    //Use union operator to get nodes at different levels
-    //see: http://stackoverflow.com/questions/11040469/xpath-how-to-select-multiple-nodes-in-different-levels
-    NSString *internshipsXpathQueryString = @"//ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'title']/a | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization'] | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization']/a/span";
-    NSArray *internshipsNodes = [internshipsParser searchWithXPathQuery:internshipsXpathQueryString];
-    
-    
-    NSMutableArray *newInternships = [[NSMutableArray alloc]init];
-    //Create an internship object to hold the information
-    //needed to be displayed in the tableview cell
-    //The information can be found in the hpple element nodes
-    //The internship nodes are ordered according to the structure of the tree
-    //For example, it will find the a tag with title and url, then the organization div tag with most
-    //likely the company name, and then the span tag if there is one.  The span tag will have the
-    //company name that was not found in the organization div tag
-    int companyCounter = 0;
-    for(TFHppleElement *element in internshipsNodes)
-    {
+    [NSURLConnection sendAsynchronousRequest:internshipURLRequest queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *erro){
+        //Create the Hpple parser to use for HTML parsing with the raw data from the internship page
+        TFHpple *internshipsParser = [TFHpple hppleWithHTMLData:data];
         
-        //Check to make sure the content is not nil, this is a known bug with hpple parser
-        if([[element firstChild] content] != nil && [element objectForKey:@"href"] != nil)
+        //Ask for the information you seek with the query string
+        //The information will come back as nodes
+        //Use union operator to get nodes at different levels
+        //see: http://stackoverflow.com/questions/11040469/xpath-how-to-select-multiple-nodes-in-different-levels
+        NSString *internshipsXpathQueryString = @"//ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'title']/a | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization'] | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization']/a/span";
+        NSArray *internshipsNodes = [internshipsParser searchWithXPathQuery:internshipsXpathQueryString];
+        
+        
+        NSMutableArray *newInternships = [[NSMutableArray alloc]init];
+        //Create an internship object to hold the information
+        //needed to be displayed in the tableview cell
+        //The information can be found in the hpple element nodes
+        //The internship nodes are ordered according to the structure of the tree
+        //For example, it will find the a tag with title and url, then the organization div tag with most
+        //likely the company name, and then the span tag if there is one.  The span tag will have the
+        //company name that was not found in the organization div tag
+        int companyCounter = 0;
+        for(TFHppleElement *element in internshipsNodes)
         {
-            IFInternship *internship = [[IFInternship alloc]init];
-            internship.title = [[element firstChild] content];
-            internship.url = [element objectForKey:@"href"];
-            [newInternships addObject:internship];
+            
+            //Check to make sure the content is not nil, this is a known bug with hpple parser
+            if([[element firstChild] content] != nil && [element objectForKey:@"href"] != nil)
+            {
+                IFInternship *internship = [[IFInternship alloc]init];
+                internship.title = [[element firstChild] content];
+                internship.url = [element objectForKey:@"href"];
+                [newInternships addObject:internship];
+            }
+            else if([[element objectForKey:@"class"] isEqualToString: @"organization"])
+            {
+                IFInternship *internship = [newInternships objectAtIndex:companyCounter];
+                internship.company = [[element firstChild]content];
+                internship.company = [internship.company stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                companyCounter++;
+            }
+            else
+            {
+                //for internmatch.com any company name for an internship that has a link embedded
+                //in it is a span tag and also has a /n for the organization div tag
+                //so we need to decrement the counter to get the right internship
+                companyCounter--;
+                IFInternship *internship = [newInternships objectAtIndex:companyCounter];
+                internship.company = [[element firstChild]content];
+                companyCounter++;
+            }
         }
-        else if([[element objectForKey:@"class"] isEqualToString: @"organization"])
-        {
-            IFInternship *internship = [newInternships objectAtIndex:companyCounter];
-            internship.company = [[element firstChild]content];
-            internship.company = [internship.company stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-            companyCounter++;
-        }
-        else
-        {
-            //for internmatch.com any company name for an internship that has a link embedded
-            //in it is a span tag and also has a /n for the organization div tag
-            //so we need to decrement the counter to get the right internship
-            companyCounter--;
-            IFInternship *internship = [newInternships objectAtIndex:companyCounter];
-            internship.company = [[element firstChild]content];
-            companyCounter++;
-        }
+        
+        //Update the objects array that the table view uses as data
+        //for the cells
+        _objects = newInternships;
+        
+        [_uiActivityIndicatorView stopAnimating];
+        //Refresh the tableview with new data
+        [self.tableView reloadData];
+
+
+    }];
+    
+    
     }
-    
-    //Update the objects array that the table view uses as data
-    //for the cells
-    _objects = newInternships;
-    
-    [_uiActivityIndicatorView stopAnimating];
-    //Refresh the tableview with new data
-    [self.tableView reloadData];
-}
 
 - (void)viewDidLoad
 {

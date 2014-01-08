@@ -24,6 +24,4 @@
 
 -(IBAction)searchInternships:(id)sender;
 
--(void)loadInternships;
-
 @end

@@ -269,7 +269,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    switch (section)
+    {
+        case 0:
+        {
+            return [[_internshipDictionary objectForKey:@"InternMatch"] count];
+            break;
+        }
+        case 1:
+        {
+            return [[_internshipDictionary objectForKey:@"LinkedIn"] count];
+            break;
+        }
+        default:
+        {
+            return 0;
+        }
+    };
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

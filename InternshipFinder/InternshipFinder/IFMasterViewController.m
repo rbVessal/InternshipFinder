@@ -141,7 +141,7 @@
         {
             IFInternship *internship = [[IFInternship alloc]init];
             internship.title = [[element firstChild] content];
-            internship.url = [element objectForKey:@"href"];
+            internship.url = [NSString stringWithFormat:@"http://www.internmatch.com/%@",[element objectForKey:@"href"]];
             [newInternships addObject:internship];
         }
         else if([[element objectForKey:@"class"] isEqualToString: @"organization"])
@@ -354,18 +354,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        /*NSDate *object = _objects[indexPath.row];
-        self.detailViewController.detailItem = object;*/
-    }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        /*NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];*/
+    //Open the link to the internship positing based on which internship is selected
+    switch (indexPath.section)
+    {
+        case 0:
+        {
+            NSMutableArray *internships = [_internshipDictionary objectForKey:@"InternMatch"];
+            IFInternship *internship = [internships objectAtIndex:indexPath.row];
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:internship.url]];
+            break;
+        }
+        case 1:
+        {
+            NSMutableArray *internships = [_internshipDictionary objectForKey:@"LinkedIn"];
+            IFInternship *internship = [internships objectAtIndex:indexPath.row];
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:internship.url]];
+        }
+        default:
+        {
+            break;
+        }
     }
 }
 

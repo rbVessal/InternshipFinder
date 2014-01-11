@@ -29,6 +29,8 @@
 		B3213B581868F78D0071C770 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B3213B551868F78D0071C770 /* XPathQuery.m */; };
 		B3213B5B1868F8E40071C770 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3213B591868F8E40071C770 /* libxml2.2.dylib */; };
 		B3213B5C1868F8E40071C770 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3213B5A1868F8E40071C770 /* libxml2.dylib */; };
+		B34204891880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */; };
+		B342048A1880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		B3213B551868F78D0071C770 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		B3213B591868F8E40071C770 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		B3213B5A1868F8E40071C770 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		B34204871880BA3A0005A9B8 /* IFInternshipFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFInternshipFinder.h; sourceTree = "<group>"; };
+		B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFInternshipFinder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,8 @@
 			children = (
 				B3213B491868F4A90071C770 /* IFInternship.h */,
 				B3213B4A1868F4A90071C770 /* IFInternship.m */,
+				B34204871880BA3A0005A9B8 /* IFInternshipFinder.h */,
+				B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 				B3213B581868F78D0071C770 /* XPathQuery.m in Sources */,
 				B3213B561868F78D0071C770 /* TFHpple.m in Sources */,
 				B3213B4B1868F4A90071C770 /* IFInternship.m in Sources */,
+				B34204891880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */,
 				B3213B1E1868F1040071C770 /* IFAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B342048A1880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */,
 				B3213B3F1868F1050071C770 /* InternshipFinderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TFHpple.h"
+#import "IFInternshipFinder.h"
 #import "IFInternship.h"
-#import <dispatch/dispatch.h>
 
 @class IFDetailViewController;
 
@@ -21,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *internshipTypeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *cityTextField;
 @property (weak, nonatomic) IBOutlet UITextField *stateTextField;
+
+@property (strong, nonatomic) UIActivityIndicatorView *uiActivityIndicatorView;
+
 
 -(IBAction)searchInternships:(id)sender;
 

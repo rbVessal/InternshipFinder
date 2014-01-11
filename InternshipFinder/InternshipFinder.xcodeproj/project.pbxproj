@@ -14,8 +14,8 @@
 		B3213B1A1868F1040071C770 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3213B191868F1040071C770 /* main.m */; };
 		B3213B1E1868F1040071C770 /* IFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3213B1D1868F1040071C770 /* IFAppDelegate.m */; };
 		B3213B211868F1040071C770 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3213B1F1868F1040071C770 /* Main_iPhone.storyboard */; };
-		B3213B271868F1050071C770 /* IFMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3213B261868F1050071C770 /* IFMasterViewController.m */; };
-		B3213B2A1868F1050071C770 /* IFDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3213B291868F1050071C770 /* IFDetailViewController.m */; };
+		B3213B271868F1050071C770 /* IFInternshipFinderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3213B261868F1050071C770 /* IFInternshipFinderViewController.m */; };
+		B3213B2A1868F1050071C770 /* IFInternshipFinderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3213B291868F1050071C770 /* IFInternshipFinderDetailViewController.m */; };
 		B3213B2C1868F1050071C770 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3213B2B1868F1050071C770 /* Images.xcassets */; };
 		B3213B331868F1050071C770 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3213B321868F1050071C770 /* XCTest.framework */; };
 		B3213B341868F1050071C770 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3213B0D1868F1040071C770 /* Foundation.framework */; };
@@ -54,10 +54,10 @@
 		B3213B1C1868F1040071C770 /* IFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFAppDelegate.h; sourceTree = "<group>"; };
 		B3213B1D1868F1040071C770 /* IFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IFAppDelegate.m; sourceTree = "<group>"; };
 		B3213B201868F1040071C770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		B3213B251868F1040071C770 /* IFMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFMasterViewController.h; sourceTree = "<group>"; };
-		B3213B261868F1050071C770 /* IFMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IFMasterViewController.m; sourceTree = "<group>"; };
-		B3213B281868F1050071C770 /* IFDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFDetailViewController.h; sourceTree = "<group>"; };
-		B3213B291868F1050071C770 /* IFDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IFDetailViewController.m; sourceTree = "<group>"; };
+		B3213B251868F1040071C770 /* IFInternshipFinderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFInternshipFinderViewController.h; sourceTree = "<group>"; };
+		B3213B261868F1050071C770 /* IFInternshipFinderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IFInternshipFinderViewController.m; sourceTree = "<group>"; };
+		B3213B281868F1050071C770 /* IFInternshipFinderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFInternshipFinderDetailViewController.h; sourceTree = "<group>"; };
+		B3213B291868F1050071C770 /* IFInternshipFinderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IFInternshipFinderDetailViewController.m; sourceTree = "<group>"; };
 		B3213B2B1868F1050071C770 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B3213B311868F1050071C770 /* InternshipFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InternshipFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3213B321868F1050071C770 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -144,10 +144,10 @@
 				B3213B1C1868F1040071C770 /* IFAppDelegate.h */,
 				B3213B1D1868F1040071C770 /* IFAppDelegate.m */,
 				B3213B1F1868F1040071C770 /* Main_iPhone.storyboard */,
-				B3213B251868F1040071C770 /* IFMasterViewController.h */,
-				B3213B261868F1050071C770 /* IFMasterViewController.m */,
-				B3213B281868F1050071C770 /* IFDetailViewController.h */,
-				B3213B291868F1050071C770 /* IFDetailViewController.m */,
+				B3213B251868F1040071C770 /* IFInternshipFinderViewController.h */,
+				B3213B261868F1050071C770 /* IFInternshipFinderViewController.m */,
+				B3213B281868F1050071C770 /* IFInternshipFinderDetailViewController.h */,
+				B3213B291868F1050071C770 /* IFInternshipFinderDetailViewController.m */,
 				B3213B2B1868F1050071C770 /* Images.xcassets */,
 				B3213B141868F1040071C770 /* Supporting Files */,
 			);
@@ -306,9 +306,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3213B571868F78D0071C770 /* TFHppleElement.m in Sources */,
-				B3213B2A1868F1050071C770 /* IFDetailViewController.m in Sources */,
+				B3213B2A1868F1050071C770 /* IFInternshipFinderDetailViewController.m in Sources */,
 				B3213B1A1868F1040071C770 /* main.m in Sources */,
-				B3213B271868F1050071C770 /* IFMasterViewController.m in Sources */,
+				B3213B271868F1050071C770 /* IFInternshipFinderViewController.m in Sources */,
 				B3213B581868F78D0071C770 /* XPathQuery.m in Sources */,
 				B3213B561868F78D0071C770 /* TFHpple.m in Sources */,
 				B3213B4B1868F4A90071C770 /* IFInternship.m in Sources */,

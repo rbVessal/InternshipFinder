@@ -13,18 +13,22 @@
 
 #define NUMBER_OF_INTERNSHIP_WEBSITES 2
 
+@protocol InternshipFinderDelegate <NSObject>
+
+@required
+-(void)updateTableViewWithInternshipResults;
+@end
+
 @interface IFInternshipFinder : NSObject
 
 //Attributes
 @property (nonatomic, strong) NSString *internshipType;
 @property (nonatomic, strong) NSString *internshipCityLocation;
 @property (nonatomic, strong) NSString *internshipStateLocation;
-@property (nonatomic, strong) dispatch_queue_t backgroundQueue;
-@property (nonatomic, strong) NSMutableDictionary *internshipURLDictionary;
 @property (nonatomic, strong) NSMutableDictionary *internshipDictionary;
+@property (nonatomic, weak) id <InternshipFinderDelegate> delegate;
 
 //Methods
--(id)initWithUIActivityIndicator:(UIActivityIndicatorView*)uiActivityIndicator withTableView:(UITableView*)tableView;
 -(void)clearOldInternships;
 -(void)createURLStrings;
 -(void)startSearch;

@@ -10,13 +10,15 @@
 
 @implementation IFInternshipFinder
 {
-    UITableView *_tableView;
-    UIActivityIndicatorView *_uiActivityIndicatorView;
+    //Private instance variables
+    dispatch_queue_t _backgroundQueue;
+    NSMutableDictionary *_internshipURLDictionary;
+
+
 }
 
-
 //Overide init to initialize the class's instance variables
--(id)initWithUIActivityIndicator:(UIActivityIndicatorView *)uiActivityIndicator withTableView:(UITableView *)tableView
+-(id)init
 {
     //Call the super constructor which is NSObject's constructor
     self = [super init];
@@ -24,8 +26,6 @@
     _backgroundQueue = dispatch_queue_create("background", NULL);
     _internshipDictionary = [[NSMutableDictionary alloc]init];
     _internshipURLDictionary = [[NSMutableDictionary alloc]initWithCapacity:NUMBER_OF_INTERNSHIP_WEBSITES];
-    _tableView = tableView;
-    _uiActivityIndicatorView = uiActivityIndicator;
     
     return self;
 }
@@ -199,9 +199,7 @@
                  dispatch_async(dispatch_get_main_queue(), ^(void)
                 {
                     
-                    [_uiActivityIndicatorView stopAnimating];
-                    //Refresh the tableview with new data
-                    [_tableView reloadData];
+                    [self.delegate updateTableViewWithInternshipResults];
                     
                 });
              }

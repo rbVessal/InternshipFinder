@@ -12,7 +12,7 @@
 
 @class IFDetailViewController;
 
-@interface IFMasterViewController : UITableViewController <UISearchBarDelegate>
+@interface IFMasterViewController : UITableViewController <UISearchBarDelegate, InternshipFinderDelegate>
 
 
 @property (strong, nonatomic) IFDetailViewController *detailViewController;
@@ -20,8 +20,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *internshipTypeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *cityTextField;
 @property (weak, nonatomic) IBOutlet UITextField *stateTextField;
-
-@property (strong, nonatomic) UIActivityIndicatorView *uiActivityIndicatorView;
 
 
 -(IBAction)searchInternships:(id)sender;

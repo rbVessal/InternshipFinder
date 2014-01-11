@@ -6,14 +6,15 @@
 //  Copyright (c) 2013 Rebecca Vessal. All rights reserved.
 //
 
-#import "IFMasterViewController.h"
-#import "IFDetailViewController.h"
+#import "IFInternshipFinderViewController.h"
+#import "IFInternshipFinderDetailViewController.h"
 
 
 @interface IFMasterViewController ()
 {
     //Private instance variables
     IFInternshipFinder *_internshipFinder;
+    UIActivityIndicatorView *_uiActivityIndicatorView;
 }
 @end
 
@@ -44,7 +45,10 @@
     [self.view addSubview:_uiActivityIndicatorView];
     
     //Initialize the internship finder
-    _internshipFinder = [[IFInternshipFinder alloc]initWithUIActivityIndicator:_uiActivityIndicatorView withTableView:self.tableView];
+    _internshipFinder = [[IFInternshipFinder alloc]init];
+    //Set the delegate relationship between view controller and model
+    //to update the table view with the new internship results
+    _internshipFinder.delegate = self;
     
 }
 
@@ -67,6 +71,14 @@
     
     //Start the search and load in the internships results in the tableview
     [_internshipFinder startSearch];
+}
+
+#pragma mark - Internship Finder Protocol
+//Update the table view with the new internships created from the HMTL parsing
+-(void)updateTableViewWithInternshipResults
+{
+    [_uiActivityIndicatorView stopAnimating];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Rebecca Vessal. All rights reserved.
 //
 
-#import "IFDetailViewController.h"
+#import "IFInternshipFinderDetailViewController.h"
 
 @interface IFDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;

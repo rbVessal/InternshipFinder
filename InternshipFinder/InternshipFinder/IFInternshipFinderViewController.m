@@ -121,15 +121,37 @@
     {
         case 0:
         {
-            return @"InternMatch.com";
+            return @"InternMatch";
         }
         case 1:
         {
-            return @"LinkedIn.com";
+            return @"LinkedIn";
         }
         default:
         {
             return @"";
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView*)view;
+    switch (section)
+    {
+        case 0:
+        {
+            header.contentView.backgroundColor = [UIColor greenColor];
+            break;
+        }
+        case 1:
+        {
+            header.contentView.backgroundColor = [UIColor blueColor];
+            break;
+        }
+        default:
+        {
+            break;
         }
     }
 }

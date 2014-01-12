@@ -141,12 +141,14 @@
     {
         case 0:
         {
-            header.contentView.backgroundColor = [UIColor greenColor];
+            header.contentView.backgroundColor = [UIColor colorWithRed:82.0/255.0 green:64.0/255.0 blue:58.0/255.0 alpha:1.0];
+            header.textLabel.textColor = [UIColor whiteColor];
             break;
         }
         case 1:
         {
-            header.contentView.backgroundColor = [UIColor blueColor];
+            header.contentView.backgroundColor = [UIColor colorWithRed:37.0/255.0 green:114.0/255.0 blue:176.0/255.0 alpha:1.0];
+            header.textLabel.textColor = [UIColor whiteColor];
             break;
         }
         default:

@@ -118,6 +118,16 @@
             internship.company = [[element firstChild]content];
             companyCounter++;
         }
+        else if([[element objectForKey:@"class"] isEqualToString:@"briefDescription"])
+        {
+            companyCounter--;
+            IFInternship *internship = [newInternships objectAtIndex:companyCounter];
+            internship.briefDescription = [[element firstChild]content];
+            //Remove word wrapping in the brief description if there is any
+            internship.briefDescription = [internship.briefDescription stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            internship.briefDescription = [internship.briefDescription stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            companyCounter++;
+        }
         else
         {
             companyCounter--;
@@ -150,6 +160,20 @@
             internship.company = [[element firstChild]content];
             companyCounter++;
         }
+        else if([[element objectForKey:@"itemprop"] isEqualToString:@"addressLocality"])
+        {
+            companyCounter--;
+            IFInternship *internship = [newInternships objectAtIndex:companyCounter];
+            internship.location = [[element firstChild]content];
+            companyCounter++;
+        }
+        else
+        {
+            companyCounter--;
+            IFInternship *internship = [newInternships objectAtIndex:companyCounter];
+            internship.briefDescription = [[element firstChild]content];
+            companyCounter++;
+        }
     }
     return newInternships;
 }
@@ -177,7 +201,7 @@
              NSMutableArray *newInternships;
              if([internshipPostHost isEqualToString:@"InternMatch"])
              {
-                 internshipsXpathQueryString = @"//ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'title']/a | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization'] | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization']/a/span | //div[@class = 'details']/span[1]";
+                 internshipsXpathQueryString = @"//ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'title']/a | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization'] | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization']/a/span | //div[@class = 'details']/span[1] | //div[@class = 'briefDescription']";
                  
                  NSArray *internshipsNodes = [internshipsParser searchWithXPathQuery:internshipsXpathQueryString];
                  
@@ -188,7 +212,7 @@
              else
              {
                  
-                 internshipsXpathQueryString = @"//div[@class = 'content']/h3/a | //div[@class = 'content']/div[@itemprop = 'hiringOrganization']/a";
+                 internshipsXpathQueryString = @"//div[@class = 'content']/h3/a | //div[@class = 'content']/div[@itemprop = 'hiringOrganization']/a | //div[@class = 'content']/div[@class = 'details']/span[@itemprop = 'jobLocation']/span[@itemprop = 'address']/span[@itemprop = 'addressLocality'] | //div[@class = 'content']/dl[@class = 'snippet']/dd/p[@itemprop = 'description']";
                  
                  NSArray *internshipsNodes = [internshipsParser searchWithXPathQuery:internshipsXpathQueryString];
                  

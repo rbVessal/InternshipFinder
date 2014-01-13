@@ -158,9 +158,9 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    IFInternshipCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InternshipCell"];
     //Note:  In storyboards, the resusable cell is never nil, so no need to check for this
     switch (indexPath.section)
     {
@@ -168,16 +168,20 @@
         {
             NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"InternMatch"];
             IFInternship *internship = [internships objectAtIndex:indexPath.row];
-            cell.textLabel.text = internship.title;
-            cell.detailTextLabel.text = internship.company;
+            cell.titleLabel.text = internship.title;
+            cell.companyNameLabel.text = internship.company;
+            cell.locationLabel.text = internship.location;
+            cell.briefDescriptionLabel.text = internship.briefDescription;
             break;
         }
         case 1:
         {
             NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"LinkedIn"];
             IFInternship *internship = [internships objectAtIndex:indexPath.row];
-            cell.textLabel.text = internship.title;
-            cell.detailTextLabel.text = internship.company;
+            cell.titleLabel.text = internship.title;
+            cell.companyNameLabel.text = internship.company;
+            cell.locationLabel.text = internship.location;
+            cell.briefDescriptionLabel.text = internship.briefDescription;
             break;
         }
         default:

@@ -30,6 +30,7 @@
 		B3213B5C1868F8E40071C770 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3213B5A1868F8E40071C770 /* libxml2.dylib */; };
 		B34204891880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */; };
 		B342048A1880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */; };
+		B38D72D61883918800B3AC30 /* IFInternshipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B38D72D51883918800B3AC30 /* IFInternshipCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		B3213B5A1868F8E40071C770 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		B34204871880BA3A0005A9B8 /* IFInternshipFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFInternshipFinder.h; sourceTree = "<group>"; };
 		B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFInternshipFinder.m; sourceTree = "<group>"; };
+		B38D72D41883918800B3AC30 /* IFInternshipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFInternshipCell.h; sourceTree = "<group>"; };
+		B38D72D51883918800B3AC30 /* IFInternshipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFInternshipCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,15 +142,13 @@
 		B3213B131868F1040071C770 /* InternshipFinder */ = {
 			isa = PBXGroup;
 			children = (
+				B38D72D718839E9C00B3AC30 /* Controllers */,
+				B38D72D31883915700B3AC30 /* TableView Cells */,
 				B3213B4F1868F73E0071C770 /* hpple */,
-				B3213B481868F4270071C770 /* Model */,
+				B3213B481868F4270071C770 /* Models */,
 				B3213B1C1868F1040071C770 /* IFAppDelegate.h */,
 				B3213B1D1868F1040071C770 /* IFAppDelegate.m */,
 				B3213B1F1868F1040071C770 /* Main_iPhone.storyboard */,
-				B3213B251868F1040071C770 /* IFInternshipFinderViewController.h */,
-				B3213B261868F1050071C770 /* IFInternshipFinderViewController.m */,
-				B3213B281868F1050071C770 /* IFInternshipFinderDetailViewController.h */,
-				B3213B291868F1050071C770 /* IFInternshipFinderDetailViewController.m */,
 				B3213B2B1868F1050071C770 /* Images.xcassets */,
 				B3213B141868F1040071C770 /* Supporting Files */,
 			);
@@ -183,7 +184,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B3213B481868F4270071C770 /* Model */ = {
+		B3213B481868F4270071C770 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				B3213B491868F4A90071C770 /* IFInternship.h */,
@@ -191,7 +192,7 @@
 				B34204871880BA3A0005A9B8 /* IFInternshipFinder.h */,
 				B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		B3213B4F1868F73E0071C770 /* hpple */ = {
@@ -205,6 +206,26 @@
 				B3213B551868F78D0071C770 /* XPathQuery.m */,
 			);
 			name = hpple;
+			sourceTree = "<group>";
+		};
+		B38D72D31883915700B3AC30 /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B38D72D41883918800B3AC30 /* IFInternshipCell.h */,
+				B38D72D51883918800B3AC30 /* IFInternshipCell.m */,
+			);
+			name = "TableView Cells";
+			sourceTree = "<group>";
+		};
+		B38D72D718839E9C00B3AC30 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B3213B251868F1040071C770 /* IFInternshipFinderViewController.h */,
+				B3213B261868F1050071C770 /* IFInternshipFinderViewController.m */,
+				B3213B281868F1050071C770 /* IFInternshipFinderDetailViewController.h */,
+				B3213B291868F1050071C770 /* IFInternshipFinderDetailViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B38D72D61883918800B3AC30 /* IFInternshipCell.m in Sources */,
 				B3213B571868F78D0071C770 /* TFHppleElement.m in Sources */,
 				B3213B2A1868F1050071C770 /* IFInternshipFinderDetailViewController.m in Sources */,
 				B3213B1A1868F1040071C770 /* main.m in Sources */,

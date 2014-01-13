@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IFInternshipFinder.h"
 #import "IFInternship.h"
+#import "IFInternshipCell.h"
 
 @class IFDetailViewController;
 

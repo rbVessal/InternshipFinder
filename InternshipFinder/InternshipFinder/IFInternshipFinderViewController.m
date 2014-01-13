@@ -223,28 +223,33 @@
 }
 */
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //Open the link to the internship positing based on which internship is selected
-    switch (indexPath.section)
+    if ([[segue identifier] isEqualToString:@"showDetail"])
     {
-        case 0:
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        //Open the link to the internship positing based on which internship is selected
+        switch (indexPath.section)
         {
-            NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"InternMatch"];
-            IFInternship *internship = [internships objectAtIndex:indexPath.row];
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:internship.url]];
-            break;
+            case 0:
+            {
+                NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"InternMatch"];
+                IFInternship *internship = [internships objectAtIndex:indexPath.row];
+                [[segue destinationViewController]setUrlRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:internship.url]]];
+                break;
+            }
+            case 1:
+            {
+                NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"LinkedIn"];
+                IFInternship *internship = [internships objectAtIndex:indexPath.row];
+                [[segue destinationViewController]setUrlRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:internship.url]]];
+            }
+            default:
+            {
+                break;
+            }
         }
-        case 1:
-        {
-            NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"LinkedIn"];
-            IFInternship *internship = [internships objectAtIndex:indexPath.row];
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:internship.url]];
-        }
-        default:
-        {
-            break;
-        }
+
     }
 }
 

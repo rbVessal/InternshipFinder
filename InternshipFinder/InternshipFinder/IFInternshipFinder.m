@@ -13,8 +13,6 @@
     //Private instance variables
     dispatch_queue_t _backgroundQueue;
     NSMutableDictionary *_internshipURLDictionary;
-
-
 }
 
 //Overide init to initialize the class's instance variables
@@ -55,7 +53,7 @@
     //Use NSURLConnection to make this async and cache the data
     //Add %% to escape the %
     //see: http://stackoverflow.com/questions/739682/how-to-add-percent-sign-to-nsstring
-    NSURL *internMatchInternshipsURL = [NSURL URLWithString:[NSString stringWithFormat: @"http://www.internmatch.com/search/internships?&&&count=10&location=%@%%2C+%@&page=1&q=%@&sort=relevance", _internshipCityLocation, _internshipStateLocation, _internshipType]];
+    NSURL *internMatchInternshipsURL = [NSURL URLWithString:[NSString stringWithFormat: @"http://www.internmatch.com/search/internships?&&&count=10&filters%%5Blisting_type%%5D=Internship&location=%@%%2C+%@&page=1&q=%@&sort=relevance", _internshipCityLocation, _internshipStateLocation, _internshipType]];
     [_internshipURLDictionary setObject: internMatchInternshipsURL forKey:@"InternMatch"];
     
     //Replace '+' with '-' signs for query for linkedin.com
@@ -110,7 +108,7 @@
             internship.company = [internship.company stringByReplacingOccurrencesOfString:@"\n" withString:@""];
             companyCounter++;
         }
-        else
+        else if([[element objectForKey:@"class"] isEqualToString:@"text"])
         {
             //for internmatch.com any company name for an internship that has a link embedded
             //in it is a span tag and also has a /n for the organization div tag
@@ -118,6 +116,13 @@
             companyCounter--;
             IFInternship *internship = [newInternships objectAtIndex:companyCounter];
             internship.company = [[element firstChild]content];
+            companyCounter++;
+        }
+        else
+        {
+            companyCounter--;
+            IFInternship *internship = [newInternships objectAtIndex:companyCounter];
+            internship.location = [[element firstChild]content];
             companyCounter++;
         }
     }
@@ -172,7 +177,7 @@
              NSMutableArray *newInternships;
              if([internshipPostHost isEqualToString:@"InternMatch"])
              {
-                 internshipsXpathQueryString = @"//ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'title']/a | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization'] | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization']/a/span";
+                 internshipsXpathQueryString = @"//ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'title']/a | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization'] | //ul[@class = 'internships']/li/div[@class = 'card internship linkable']/div[@class = 'highlights']/div[@class = 'organization']/a/span | //div[@class = 'details']/span[1]";
                  
                  NSArray *internshipsNodes = [internshipsParser searchWithXPathQuery:internshipsXpathQueryString];
                  

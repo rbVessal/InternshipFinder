@@ -120,7 +120,7 @@
                                             <outlet property="companyNameLabel" destination="nIz-fo-tmA" id="lJw-Cs-n39"/>
                                             <outlet property="locationLabel" destination="Njg-m8-QmM" id="jj8-F4-e9F"/>
                                             <outlet property="titleLabel" destination="yKW-k3-go6" id="obw-ak-kYw"/>
-                                            <segue destination="Ah7-4n-0Wa" kind="push" id="kfP-yl-X6a"/>
+                                            <segue destination="Ah7-4n-0Wa" kind="push" identifier="showDetail" id="kfP-yl-X6a"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B309870D1885DD6100245930 /* search-75.png in Resources */ = {isa = PBXBuildFile; fileRef = B30987021885DD6100245930 /* search-75.png */; };
+		B309870E1885DD6100245930 /* search-75.png in Resources */ = {isa = PBXBuildFile; fileRef = B30987021885DD6100245930 /* search-75.png */; };
 		B3213B0E1868F1040071C770 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3213B0D1868F1040071C770 /* Foundation.framework */; };
 		B3213B101868F1040071C770 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3213B0F1868F1040071C770 /* CoreGraphics.framework */; };
 		B3213B121868F1040071C770 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3213B111868F1040071C770 /* UIKit.framework */; };
@@ -44,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B30987021885DD6100245930 /* search-75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-75.png"; sourceTree = "<group>"; };
 		B3213B0A1868F1040071C770 /* InternshipFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InternshipFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3213B0D1868F1040071C770 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B3213B0F1868F1040071C770 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -107,6 +110,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B30987171885E03900245930 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B30987021885DD6100245930 /* search-75.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		B3213B011868F1040071C770 = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +169,7 @@
 		B3213B141868F1040071C770 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B30987171885E03900245930 /* Resources */,
 				B3213B151868F1040071C770 /* InternshipFinder-Info.plist */,
 				B3213B161868F1040071C770 /* InfoPlist.strings */,
 				B3213B191868F1040071C770 /* main.m */,
@@ -307,6 +319,7 @@
 			files = (
 				B3213B2C1868F1050071C770 /* Images.xcassets in Resources */,
 				B3213B211868F1040071C770 /* Main_iPhone.storyboard in Resources */,
+				B309870D1885DD6100245930 /* search-75.png in Resources */,
 				B3213B181868F1040071C770 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +328,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B309870E1885DD6100245930 /* search-75.png in Resources */,
 				B3213B3D1868F1050071C770 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

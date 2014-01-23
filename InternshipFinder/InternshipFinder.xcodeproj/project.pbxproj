@@ -31,6 +31,8 @@
 		B34204891880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */; };
 		B342048A1880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */; };
 		B38D72D61883918800B3AC30 /* IFInternshipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B38D72D51883918800B3AC30 /* IFInternshipCell.m */; };
+		B3D5574D1890452C000CD478 /* IFFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D5574C1890452C000CD478 /* IFFavoritesViewController.m */; };
+		B3D5574E1890452C000CD478 /* IFFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D5574C1890452C000CD478 /* IFFavoritesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,9 @@
 		B34204881880BA3A0005A9B8 /* IFInternshipFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFInternshipFinder.m; sourceTree = "<group>"; };
 		B38D72D41883918800B3AC30 /* IFInternshipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFInternshipCell.h; sourceTree = "<group>"; };
 		B38D72D51883918800B3AC30 /* IFInternshipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFInternshipCell.m; sourceTree = "<group>"; };
+		B3D5574B1890452C000CD478 /* IFFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFFavoritesViewController.h; sourceTree = "<group>"; };
+		B3D5574C1890452C000CD478 /* IFFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFFavoritesViewController.m; sourceTree = "<group>"; };
+		B3D5574F189060A1000CD478 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +141,7 @@
 		B3213B0C1868F1040071C770 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3D5574F189060A1000CD478 /* CoreData.framework */,
 				B3213B591868F8E40071C770 /* libxml2.2.dylib */,
 				B3213B5A1868F8E40071C770 /* libxml2.dylib */,
 				B3213B0D1868F1040071C770 /* Foundation.framework */,
@@ -232,6 +238,8 @@
 				B3213B261868F1050071C770 /* IFInternshipFinderViewController.m */,
 				B3213B281868F1050071C770 /* IFInternshipFinderDetailViewController.h */,
 				B3213B291868F1050071C770 /* IFInternshipFinderDetailViewController.m */,
+				B3D5574B1890452C000CD478 /* IFFavoritesViewController.h */,
+				B3D5574C1890452C000CD478 /* IFFavoritesViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -284,6 +292,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Rebecca Vessal";
 				TargetAttributes = {
+					B3213B091868F1040071C770 = {
+						DevelopmentTeam = B747352D8N;
+					};
 					B3213B301868F1050071C770 = {
 						TestTargetID = B3213B091868F1040071C770;
 					};
@@ -338,6 +349,7 @@
 				B3213B571868F78D0071C770 /* TFHppleElement.m in Sources */,
 				B3213B2A1868F1050071C770 /* IFInternshipFinderDetailViewController.m in Sources */,
 				B3213B1A1868F1040071C770 /* main.m in Sources */,
+				B3D5574D1890452C000CD478 /* IFFavoritesViewController.m in Sources */,
 				B3213B271868F1050071C770 /* IFInternshipFinderViewController.m in Sources */,
 				B3213B581868F78D0071C770 /* XPathQuery.m in Sources */,
 				B3213B561868F78D0071C770 /* TFHpple.m in Sources */,
@@ -352,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B342048A1880BA3A0005A9B8 /* IFInternshipFinder.m in Sources */,
+				B3D5574E1890452C000CD478 /* IFFavoritesViewController.m in Sources */,
 				B3213B3F1868F1050071C770 /* InternshipFinderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,6 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InternshipFinder/InternshipFinder-Prefix.pch";
 				INFOPLIST_FILE = "InternshipFinder/InternshipFinder-Info.plist";
@@ -497,6 +511,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InternshipFinder/InternshipFinder-Prefix.pch";
 				INFOPLIST_FILE = "InternshipFinder/InternshipFinder-Info.plist";

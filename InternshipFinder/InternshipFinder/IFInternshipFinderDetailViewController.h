@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IFDetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface IFInternshipFinderDetailViewController : UIViewController <UISplitViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) NSURLRequest *urlRequest;

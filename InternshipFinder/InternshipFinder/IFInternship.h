@@ -8,13 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IFInternship : NSObject
+@interface IFInternship : NSObject <NSCoding>
+
+extern NSString *const kIFInternshipTitle;
+extern NSString *const kIFInternshipCompany;
+extern NSString *const kIFInternshipUrl;
+extern NSString *const kIFInternshipLocation;
+extern NSString *const kIFInternshipBriefDescription;
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *company;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *briefDescription;
-@property (nonatomic, strong) NSString *fullDescription;
 
 @end

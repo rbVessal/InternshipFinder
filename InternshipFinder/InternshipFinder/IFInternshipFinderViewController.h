@@ -10,13 +10,9 @@
 #import "IFInternshipFinder.h"
 #import "IFInternship.h"
 #import "IFInternshipCell.h"
+#import "IFInternshipFinderDetailViewController.h"
 
-@class IFDetailViewController;
-
-@interface IFMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, InternshipFinderDelegate>
-
-
-@property (strong, nonatomic) IFDetailViewController *detailViewController;
+@interface IFInternshipFinderViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, InternshipFinderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *internshipTypeTextField;
@@ -26,5 +22,6 @@
 
 
 -(IBAction)searchInternships:(id)sender;
+-(IBAction)saveInternship:(id)sender;
 
 @end

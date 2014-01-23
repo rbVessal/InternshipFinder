@@ -7,18 +7,18 @@
 //
 
 #import "IFInternshipFinderViewController.h"
-#import "IFInternshipFinderDetailViewController.h"
 
 
-@interface IFMasterViewController ()
+@interface IFInternshipFinderViewController ()
 {
     //Private instance variables
     IFInternshipFinder *_internshipFinder;
+    IFInternshipFinderDetailViewController *_detailViewController;
     UIActivityIndicatorView *_uiActivityIndicatorView;
 }
 @end
 
-@implementation IFMasterViewController
+@implementation IFInternshipFinderViewController
 
 - (void)awakeFromNib
 {
@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.detailViewController = (IFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    _detailViewController = (IFInternshipFinderDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
    
     //Initialize the spinner
@@ -47,6 +47,8 @@
     _internshipFinder.delegate = self;
     
 }
+
+#pragma mark - IBActions (Buttons)
 
 //Search for internships based on the user's input
 -(IBAction)searchInternships:(id)sender
@@ -69,6 +71,51 @@
     [_internshipFinder startSearch];
 }
 
+//Save the internship on which the button was pressed on
+-(IBAction)saveInternship:(id)sender
+{
+    //Get the array of previously saved internships from user defaults
+    //Note:Immutable objects are returned by NSUserDefaults so we need to make a mutable copy
+    //to add more internships to the array
+    NSArray *previouslySavedInternships = [[NSUserDefaults standardUserDefaults]objectForKey:@"Saved Internships"];
+    NSMutableArray *previouslySavedInternshipsCopy = [previouslySavedInternships mutableCopy];
+    if(previouslySavedInternships == nil)
+    {
+        previouslySavedInternships = [[NSMutableArray alloc]init];
+    }
+    
+    //Use the button pressed on to pinpoint which is the current cell's indexpath
+    //to use to find which internship the user wants to save
+    UIButton *saveButton = (UIButton*)sender;
+    CGRect convertedRectangle = [saveButton convertRect:saveButton.bounds toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: convertedRectangle.origin];
+    switch (indexPath.section)
+    {
+        case 0:
+        {
+            NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"InternMatch"];
+            IFInternship *internship = [internships objectAtIndex:indexPath.row];
+            NSData *internshipData = [NSKeyedArchiver archivedDataWithRootObject:internship];
+            [previouslySavedInternshipsCopy addObject:internshipData];
+            break;
+        }
+        case 1:
+        {
+            NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"LinkedIn"];
+            IFInternship *internship = [internships objectAtIndex:indexPath.row];
+            NSData *internshipData = [NSKeyedArchiver archivedDataWithRootObject:internship];
+            [previouslySavedInternshipsCopy addObject:internshipData];
+        }
+        default:
+        {
+            break;
+        }
+    }
+    //Save the internship
+    [[NSUserDefaults standardUserDefaults]setObject:previouslySavedInternshipsCopy forKey:@"Saved Internships"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
 #pragma mark - Internship Finder Protocol
 //Update the table view with the new internships created from the HMTL parsing
 -(void)updateTableViewWithInternshipResults
@@ -77,13 +124,7 @@
     [self.tableView reloadData];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table View
+#pragma mark - Table View Protocols
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -247,6 +288,12 @@
         }
 
     }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

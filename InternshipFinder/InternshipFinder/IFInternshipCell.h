@@ -13,7 +13,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *companyNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
-@property (nonatomic, weak) IBOutlet UILabel *datePostedLabel;
 @property (nonatomic, weak) IBOutlet UILabel *briefDescriptionLabel;
 
 @end

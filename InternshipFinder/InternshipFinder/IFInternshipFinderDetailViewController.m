@@ -8,12 +8,12 @@
 
 #import "IFInternshipFinderDetailViewController.h"
 
-@interface IFDetailViewController ()
+@interface IFInternshipFinderDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 
 @end
 
-@implementation IFDetailViewController
+@implementation IFInternshipFinderDetailViewController
 
 #pragma mark - Managing the detail item
 

@@ -231,6 +231,7 @@
                                     <outlet property="companyNameLabel" destination="ozi-VH-jr2" id="MTl-5b-7h8"/>
                                     <outlet property="locationLabel" destination="zkZ-s3-qwp" id="EIv-41-ab5"/>
                                     <outlet property="titleLabel" destination="lu1-88-zlT" id="qI9-op-v4k"/>
+                                    <segue destination="Ah7-4n-0Wa" kind="push" id="Qoe-jl-I8i"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -241,6 +242,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="OYt-Oj-nIc"/>
+                    <connections>
+                        <outlet property="tableView" destination="yKi-Wz-YbW" id="f75-ed-TyK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f42-7z-3cT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -282,4 +286,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="kfP-yl-X6a"/>
+    </inferredMetricsTieBreakers>
 </document>

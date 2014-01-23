@@ -71,8 +71,6 @@
    {
        //Load in the results
        [self loadInternships];
-       
-       
    });
 
 }

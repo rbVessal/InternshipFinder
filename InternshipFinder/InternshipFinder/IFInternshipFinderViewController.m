@@ -77,11 +77,22 @@
     //Get the array of previously saved internships from user defaults
     //Note:Immutable objects are returned by NSUserDefaults so we need to make a mutable copy
     //to add more internships to the array
-    NSArray *previouslySavedInternships = [[NSUserDefaults standardUserDefaults]objectForKey:@"Saved Internships"];
-    NSMutableArray *previouslySavedInternshipsCopy = [previouslySavedInternships mutableCopy];
+    NSMutableDictionary *previouslySavedInternships = [[[NSUserDefaults standardUserDefaults]dictionaryForKey:@"Saved Internships"] mutableCopy];
     if(previouslySavedInternships == nil)
     {
-        previouslySavedInternships = [[NSMutableArray alloc]init];
+        previouslySavedInternships = [[NSMutableDictionary alloc]init];
+        NSMutableArray *savedInternMatchInternshipsArray = [[NSMutableArray alloc]init];
+        [previouslySavedInternships setObject:savedInternMatchInternshipsArray forKey:@"InternMatch"];
+        NSMutableArray *savedLinkedInInternshipsArray = [[NSMutableArray alloc]init];
+        [previouslySavedInternships setObject:savedLinkedInInternshipsArray forKey:@"LinkedIn"];
+    }
+    else
+    {
+        NSMutableArray *savedInternMatchInternshipArrayCopy = [[previouslySavedInternships objectForKey:@"InternMatch"] mutableCopy];
+        [previouslySavedInternships setObject:savedInternMatchInternshipArrayCopy forKey:@"InternMatch"];
+        NSMutableArray *savedLinkedInInternshipArrayCopy = [[previouslySavedInternships objectForKey:@"LinkedIn"] mutableCopy];
+        [previouslySavedInternships setObject:savedLinkedInInternshipArrayCopy forKey:@"LinkedIn"];
+
     }
     
     //Use the button pressed on to pinpoint which is the current cell's indexpath
@@ -96,7 +107,7 @@
             NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"InternMatch"];
             IFInternship *internship = [internships objectAtIndex:indexPath.row];
             NSData *internshipData = [NSKeyedArchiver archivedDataWithRootObject:internship];
-            [previouslySavedInternshipsCopy addObject:internshipData];
+            [[previouslySavedInternships objectForKey:@"InternMatch"] addObject:internshipData];
             break;
         }
         case 1:
@@ -104,7 +115,7 @@
             NSMutableArray *internships = [_internshipFinder.internshipDictionary objectForKey:@"LinkedIn"];
             IFInternship *internship = [internships objectAtIndex:indexPath.row];
             NSData *internshipData = [NSKeyedArchiver archivedDataWithRootObject:internship];
-            [previouslySavedInternshipsCopy addObject:internshipData];
+            [[previouslySavedInternships objectForKey:@"LinkedIn"] addObject:internshipData];
         }
         default:
         {
@@ -112,7 +123,7 @@
         }
     }
     //Save the internship
-    [[NSUserDefaults standardUserDefaults]setObject:previouslySavedInternshipsCopy forKey:@"Saved Internships"];
+    [[NSUserDefaults standardUserDefaults]setObject:previouslySavedInternships forKey:@"Saved Internships"];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 

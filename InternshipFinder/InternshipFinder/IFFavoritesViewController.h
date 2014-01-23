@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IFInternship.h"
+#import "IFInternshipCell.h"
+#import "IFInternshipFinderDetailViewController.h"
+
+#define NUMBER_OF_INTERNSHIPS_SITES 2
 
 @interface IFFavoritesViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
